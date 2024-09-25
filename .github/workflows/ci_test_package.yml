@@ -194,7 +194,7 @@ jobs:
   #         DBT_VERSION: ''
   #       run: tox -e integration_databricks
 
-  integration-sqlserver-single:
+  integration-sqlserver:
     strategy:
       fail-fast: false # Don't fail one DWH if the others fail
     runs-on: ubuntu-latest
