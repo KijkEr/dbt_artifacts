@@ -221,12 +221,15 @@ jobs:
     - name: Create DBT User
       shell: pwsh
       run: |
-          echo "Create additional schemas"
+          echo "Create dbt login with sysadmin"
           sqlcmd -Q "CREATE LOGIN dbt WITH PASSWORD = '123', CHECK_POLICY = OFF, CHECK_EXPIRATION = OFF" -d "dbt_artifact_integrationtests"
           sqlcmd -Q "ALTER SERVER ROLE sysadmin ADD MEMBER dbt" -d "dbt_artifact_integrationtests"
 
     - name: Install tox
       run: python3 -m pip install tox
+
+    - name: Install Microsoft ODBC
+      run: sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
 
     - name: Checkout
       uses: actions/checkout@v3
